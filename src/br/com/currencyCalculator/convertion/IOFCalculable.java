@@ -1,2 +1,5 @@
-package br.com.currencyCalculator.convertion;public class IOFCalculable {
+package br.com.currencyCalculator.convertion;
+
+public interface IOFCalculable {
+    public double calculateIOF(double amount);
 }
