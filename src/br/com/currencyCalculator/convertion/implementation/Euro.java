@@ -4,8 +4,10 @@ import br.com.currencyCalculator.convertion.Currency;
 import br.com.currencyCalculator.convertion.FixedOperatingFeeCalculable;
 import br.com.currencyCalculator.convertion.IOFCalculable;
 
+import java.math.BigDecimal;
+
 public class Euro extends Currency implements FixedOperatingFeeCalculable, IOFCalculable {
-    private double quotation = 0.2;
+    private BigDecimal quotation = new BigDecimal("0.2");
 
     private String abbreviation = "EUR";
 
@@ -14,22 +16,22 @@ public class Euro extends Currency implements FixedOperatingFeeCalculable, IOFCa
     }
 
     @Override
-    public double calculateFixedOperatingFee() {
-        return 6.0;
+    public BigDecimal calculateFixedOperatingFee() {
+        return new BigDecimal(6.0);
     }
 
     @Override
-    public double calculateIOF(double amount) {
-        return 0.011 * amount;
+    public BigDecimal calculateIOF(BigDecimal amount) {
+        return new BigDecimal("0.011").multiply(amount);
     }
 
     @Override
-    public double calculateOperatingFee(double amount) {
+    public BigDecimal calculateOperatingFee(BigDecimal amount) {
         return calculateFixedOperatingFee();
     }
 
     @Override
-    public double calculateConversion(double amount) {
-        return quotation * (amount - calculateIOF(amount) - calculateFixedOperatingFee());
+    public BigDecimal calculateConversion(BigDecimal amount) {
+        return quotation.multiply(amount.subtract(calculateIOF(amount)).subtract(calculateFixedOperatingFee()));
     }
 }

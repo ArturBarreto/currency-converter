@@ -5,8 +5,10 @@ import br.com.currencyCalculator.convertion.FixedOperatingFeeCalculable;
 import br.com.currencyCalculator.convertion.IOFCalculable;
 import br.com.currencyCalculator.convertion.VariableOperatingFeeCalculable;
 
+import java.math.BigDecimal;
+
 public class ArgentinianPeso extends Currency implements FixedOperatingFeeCalculable, VariableOperatingFeeCalculable, IOFCalculable {
-    private double quotation = 26.24;
+    private BigDecimal quotation = new BigDecimal(26.24);
 
     private String abbreviation = "ARS";
 
@@ -15,27 +17,27 @@ public class ArgentinianPeso extends Currency implements FixedOperatingFeeCalcul
     }
 
     @Override
-    public double calculateFixedOperatingFee() {
-        return 2.5;
+    public BigDecimal calculateFixedOperatingFee() {
+        return new BigDecimal(2.5);
     }
 
     @Override
-    public double calculateIOF(double amount) {
-        return 0.011 * amount;
+    public BigDecimal calculateIOF(BigDecimal amount) {
+        return new BigDecimal(0.011).multiply(amount);
     }
 
     @Override
-    public double calculateVariableOperatingFee(double amount) {
-        return 0.015 * amount;
+    public BigDecimal calculateVariableOperatingFee(BigDecimal amount) {
+        return new BigDecimal(0.015).multiply(amount);
     }
 
     @Override
-    public double calculateOperatingFee(double amount) {
-        return calculateFixedOperatingFee() + calculateVariableOperatingFee(amount);
+    public BigDecimal calculateOperatingFee(BigDecimal amount) {
+        return calculateFixedOperatingFee().add(calculateVariableOperatingFee(amount));
     }
 
     @Override
-    public double calculateConversion(double amount) {
-        return quotation * (amount - calculateIOF(amount) - calculateFixedOperatingFee() -  calculateVariableOperatingFee(amount));
+    public BigDecimal calculateConversion(BigDecimal amount) {
+        return quotation.multiply(amount.subtract(calculateIOF(amount)).subtract(calculateFixedOperatingFee().subtract(calculateVariableOperatingFee(amount))));
     }
 }

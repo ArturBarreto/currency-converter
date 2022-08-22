@@ -1,11 +1,13 @@
 package br.com.currencyCalculator.convertion;
 
+import java.math.BigDecimal;
+
 public abstract class Currency {
-    protected double quotation;
+    protected BigDecimal quotation;
     protected String abbreviation;
 
-    public abstract double calculateConversion(double amount);
+    public abstract BigDecimal calculateConversion(BigDecimal amount);
     public abstract String getAbbreviation();
-    public abstract double calculateIOF(double amount);
-    public abstract double calculateOperatingFee(double amount);
+    public abstract BigDecimal calculateIOF(BigDecimal amount);
+    public abstract BigDecimal calculateOperatingFee(BigDecimal amount);
 }

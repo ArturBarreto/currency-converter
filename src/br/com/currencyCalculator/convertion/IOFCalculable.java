@@ -1,5 +1,7 @@
 package br.com.currencyCalculator.convertion;
 
+import java.math.BigDecimal;
+
 public interface IOFCalculable {
-    public double calculateIOF(double amount);
+    public BigDecimal calculateIOF(BigDecimal amount);
 }

@@ -3,21 +3,22 @@ package br.com.currencyCalculator;
 import br.com.currencyCalculator.convertion.Currency;
 import br.com.currencyCalculator.convertion.implementation.CalculationFactory;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         String option;
-        Double amount;
-        Double result = 0D;
+        BigDecimal amount;
+        BigDecimal result = new BigDecimal(0);
         String abbreviation = "";
 
         do {
             amount = readNumber("Digite o valor em reais (R$) [0 para finalizar]: ");
 
-            if (amount != 0) {
-                option = readString("Digite a moeda de destino:\n\t1.Euro\n\t2.Dólar\n\t3.Peso Argentino\n\t4.Peso Chileno\n\t0.Sair\n-> ");
+            if (amount.compareTo(BigDecimal.ZERO) != 0) {
+                option = readString("Digite a moeda de destino:\n\t1.Euro\n\t2.Dólar\n\t3.Peso Argentino\n\t4.Peso Chileno\n-> ");
 
                 result = calculate(amount, option);
                 abbreviation = returnAbbreviation(option);
@@ -29,10 +30,10 @@ public class App {
                 System.out.println("Total convertido -> R$ " + abbreviation + " " + result);
             }
 
-        } while (amount != 0);
+        } while (amount.compareTo(BigDecimal.ZERO) != 0);
     }
 
-    private static double calculate(Double amount, String operation) {
+    private static BigDecimal calculate(BigDecimal amount, String operation) {
         Optional<Currency> calculation = new CalculationFactory().create(operation);
 
         if (calculation.isEmpty()) {
@@ -52,7 +53,7 @@ public class App {
         }
     }
 
-    private static double returnIOF(Double amount, String operation) {
+    private static BigDecimal returnIOF(BigDecimal amount, String operation) {
         Optional<Currency> calculation = new CalculationFactory().create(operation);
 
         if (calculation.isEmpty()) {
@@ -62,7 +63,7 @@ public class App {
         }
     }
 
-    private static double returnOperatingFee(Double amount, String operation) {
+    private static BigDecimal returnOperatingFee(BigDecimal amount, String operation) {
         Optional<Currency> calculation = new CalculationFactory().create(operation);
 
         if (calculation.isEmpty()) {
@@ -72,10 +73,10 @@ public class App {
         }
     }
 
-    private static double readNumber(String message) {
+    private static BigDecimal readNumber(String message) {
         Scanner input = new Scanner(System.in);
         System.out.print(message);
-        return input.nextDouble();
+        return input.nextBigDecimal();
     }
 
     private static String readString(String message) {

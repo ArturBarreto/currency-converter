@@ -1,5 +1,7 @@
 package br.com.currencyCalculator.convertion;
 
+import java.math.BigDecimal;
+
 public interface FixedOperatingFeeCalculable {
-    public double calculateFixedOperatingFee();
+    public BigDecimal calculateFixedOperatingFee();
 }
