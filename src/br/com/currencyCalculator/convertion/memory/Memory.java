@@ -1,13 +1,30 @@
-package br.com.currencyCalculator;
+package br.com.currencyCalculator.convertion.memory;
 
-import br.com.currencyCalculator.convertion.Currency;
-import br.com.currencyCalculator.convertion.implementation.CalculationFactory;
-
-import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class Memory {
-    Map<Long,}> calculation = new HashMap<>();
+    private static Memory singleInstance = null;
+    private Map<Long, ConversionEntry> memory;
+
+    private Memory() {
+        this.memory = new HashMap<>();
+    }
+
+    public static Memory getInstance() {
+        if (singleInstance == null) {
+            singleInstance = new Memory();
+            return singleInstance;
+        }
+        return singleInstance;
+    }
+
+    public Map<Long, ConversionEntry> getConversions() {
+        return Collections.unmodifiableMap(memory);
+    }
+
+    public void add(ConversionEntry conversionEntry) {
+        this.memory.put(conversionEntry.getId(), conversionEntry);
+    }
 }

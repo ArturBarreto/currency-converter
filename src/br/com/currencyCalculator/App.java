@@ -2,10 +2,11 @@ package br.com.currencyCalculator;
 
 import br.com.currencyCalculator.convertion.Currency;
 import br.com.currencyCalculator.convertion.implementation.CalculationFactory;
+import br.com.currencyCalculator.convertion.memory.ConversionEntry;
+import br.com.currencyCalculator.convertion.memory.Memory;
+import br.com.currencyCalculator.convertion.util.BigDecimalUtil;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -13,8 +14,9 @@ public class App {
     public static void main(String[] args) {
         String option;
         BigDecimal amount;
-        BigDecimal result = new BigDecimal("0");
+        BigDecimal result;
         String abbreviation = "";
+        Memory memory = Memory.getInstance();
 
         do {
             amount = readNumber("Digite o valor em reais (R$) [0 para finalizar]: ");
@@ -25,14 +27,19 @@ public class App {
                 result = calculate(amount, option);
                 abbreviation = returnAbbreviation(option);
 
-                System.out.println("Valor em reais -> R$ " + formatBigDecimal(amount));
-                System.out.println("IOF -> R$ " + formatBigDecimal(returnIOF(amount, option)));
-                System.out.println("Taxa de Operação -> R$ "+ formatBigDecimal(returnOperatingFee(amount, option)));
+                System.out.println("Valor em reais -> R$ " + BigDecimalUtil.format(amount));
+                System.out.println("IOF -> R$ " + BigDecimalUtil.format(returnIOF(amount, option)));
+                System.out.println("Taxa de Operação -> R$ "+ BigDecimalUtil.format(returnOperatingFee(amount, option)));
                 System.out.println("----------------------------");
-                System.out.println("Total convertido -> " + abbreviation + " " + formatBigDecimal(result));
+                System.out.println("Total convertido -> " + abbreviation + " " + BigDecimalUtil.format(result));
+
+                memory.add(new ConversionEntry(abbreviation, amount, result));
             }
 
         } while (amount.compareTo(BigDecimal.ZERO) != 0);
+
+        System.out.println("\n------Histórico------");
+        memory.getConversions().forEach((k,v) -> System.out.println(v));
     }
 
     private static BigDecimal calculate(BigDecimal amount, String operation) {
@@ -87,16 +94,4 @@ public class App {
         return input.nextLine();
     }
 
-    public static String formatBigDecimal(BigDecimal n) {
-        n = n.setScale(2, RoundingMode.DOWN);
-        DecimalFormat df = new DecimalFormat();
-
-        df.setMaximumFractionDigits(2);
-        df.setMinimumFractionDigits(2);
-        df.setGroupingUsed(false);
-
-        String result = df.format(n);
-
-        return result;
-    }
 }
