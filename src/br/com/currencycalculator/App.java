@@ -15,7 +15,7 @@ public class App {
         String option;
         BigDecimal amount;
         BigDecimal result;
-        String abbreviation = "";
+        String abbreviation;
         Memory memory = Memory.getInstance();
 
         do {
@@ -27,10 +27,10 @@ public class App {
                 result = calculate(amount, option);
                 abbreviation = returnAbbreviation(option);
 
-                System.out.println("Valor em reais -> R$ " + BigDecimalUtil.format(amount));
-                System.out.println("IOF -> R$ " + BigDecimalUtil.format(returnIOF(amount, option)));
+                System.out.println("Valor em reais   -> R$ " + BigDecimalUtil.format(amount));
+                System.out.println("IOF              -> R$ " + BigDecimalUtil.format(returnIOF(amount, option)));
                 System.out.println("Taxa de Operação -> R$ "+ BigDecimalUtil.format(returnOperatingFee(amount, option)));
-                System.out.println("----------------------------");
+                System.out.println("-".repeat(30));
                 System.out.println("Total convertido -> " + abbreviation + " " + BigDecimalUtil.format(result));
 
                 memory.add(new ConversionEntry(abbreviation, amount, result));
@@ -39,7 +39,7 @@ public class App {
         } while (amount.compareTo(BigDecimal.ZERO) != 0);
 
         System.out.println("\n------Histórico------");
-        memory.getConversions().forEach((k,v) -> System.out.println(v));
+        memory.getConversions().forEach(System.out::println);
     }
 
     private static BigDecimal calculate(BigDecimal amount, String operation) {

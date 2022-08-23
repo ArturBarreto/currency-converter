@@ -1,15 +1,15 @@
 package br.com.currencycalculator.memory;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class Memory {
     private static Memory singleInstance = null;
-    private Map<Long, ConversionEntry> memory;
+    private final List<ConversionEntry> memory;
 
     private Memory() {
-        this.memory = new HashMap<>();
+        this.memory = new ArrayList<>();
     }
 
     public static Memory getInstance() {
@@ -20,11 +20,11 @@ public class Memory {
         return singleInstance;
     }
 
-    public Map<Long, ConversionEntry> getConversions() {
-        return Collections.unmodifiableMap(memory);
+    public List<ConversionEntry> getConversions() {
+        return Collections.unmodifiableList(memory);
     }
 
     public void add(ConversionEntry conversionEntry) {
-        this.memory.put(conversionEntry.getId(), conversionEntry);
+        this.memory.add(conversionEntry);
     }
 }
