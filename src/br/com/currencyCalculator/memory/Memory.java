@@ -1,4 +1,4 @@
-package br.com.currencyCalculator.convertion.memory;
+package br.com.currencyCalculator.memory;
 
 import java.util.Collections;
 import java.util.HashMap;

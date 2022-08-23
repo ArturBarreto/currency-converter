@@ -2,9 +2,9 @@ package br.com.currencyCalculator;
 
 import br.com.currencyCalculator.convertion.Currency;
 import br.com.currencyCalculator.convertion.implementation.CalculationFactory;
-import br.com.currencyCalculator.convertion.memory.ConversionEntry;
-import br.com.currencyCalculator.convertion.memory.Memory;
-import br.com.currencyCalculator.convertion.util.BigDecimalUtil;
+import br.com.currencyCalculator.memory.ConversionEntry;
+import br.com.currencyCalculator.memory.Memory;
+import br.com.currencyCalculator.util.BigDecimalUtil;
 
 import java.math.BigDecimal;
 import java.util.Optional;
