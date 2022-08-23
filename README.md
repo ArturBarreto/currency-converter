@@ -5,3 +5,5 @@
 ### Ingrid Targino Anjos
 ### Pedro Henrique Alves Rosendo
 ### Victor Silva Ribeiro
+
+![](ScrumBoard.png)
