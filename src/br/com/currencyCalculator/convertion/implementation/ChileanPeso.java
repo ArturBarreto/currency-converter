@@ -1,34 +1,25 @@
 package br.com.currencyCalculator.convertion.implementation;
 
 import br.com.currencyCalculator.convertion.Currency;
-import br.com.currencyCalculator.convertion.FixedOperatingFeeCalculable;
-import br.com.currencyCalculator.convertion.IOFCalculable;
 import br.com.currencyCalculator.convertion.VariableOperatingFeeCalculable;
 
 import java.math.BigDecimal;
 
-public class ChileanPeso extends Currency implements FixedOperatingFeeCalculable, VariableOperatingFeeCalculable, IOFCalculable {
-    private BigDecimal quotation = new BigDecimal(174.17);
+public class ChileanPeso extends Currency implements VariableOperatingFeeCalculable {
 
-    private String abbreviation = "CLP";
-
-    public String getAbbreviation() {
-        return this.abbreviation;
+    public ChileanPeso() {
+        quotation = new BigDecimal("174.17");
+        abbreviation = "CLP";
     }
 
     @Override
     public BigDecimal calculateFixedOperatingFee() {
-        return new BigDecimal(10.00);
-    }
-
-    @Override
-    public BigDecimal calculateIOF(BigDecimal amount) {
-        return new BigDecimal(0.011).multiply(amount);
+        return new BigDecimal("10.00");
     }
 
     @Override
     public BigDecimal calculateVariableOperatingFee(BigDecimal amount) {
-        return new BigDecimal(0.025).multiply(amount);
+        return new BigDecimal("0.025").multiply(amount);
     }
 
     @Override

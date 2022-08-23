@@ -1,34 +1,25 @@
 package br.com.currencyCalculator.convertion.implementation;
 
 import br.com.currencyCalculator.convertion.Currency;
-import br.com.currencyCalculator.convertion.FixedOperatingFeeCalculable;
-import br.com.currencyCalculator.convertion.IOFCalculable;
 import br.com.currencyCalculator.convertion.VariableOperatingFeeCalculable;
 
 import java.math.BigDecimal;
 
-public class ArgentinianPeso extends Currency implements FixedOperatingFeeCalculable, VariableOperatingFeeCalculable, IOFCalculable {
-    private BigDecimal quotation = new BigDecimal(26.24);
+public class ArgentinianPeso extends Currency implements VariableOperatingFeeCalculable {
 
-    private String abbreviation = "ARS";
-
-    public String getAbbreviation() {
-        return this.abbreviation;
+    public ArgentinianPeso() {
+        quotation = new BigDecimal("26.24");
+        abbreviation = "ARS";
     }
 
     @Override
     public BigDecimal calculateFixedOperatingFee() {
-        return new BigDecimal(2.5);
-    }
-
-    @Override
-    public BigDecimal calculateIOF(BigDecimal amount) {
-        return new BigDecimal(0.011).multiply(amount);
+        return new BigDecimal("2.5");
     }
 
     @Override
     public BigDecimal calculateVariableOperatingFee(BigDecimal amount) {
-        return new BigDecimal(0.015).multiply(amount);
+        return new BigDecimal("0.015").multiply(amount);
     }
 
     @Override

@@ -1,35 +1,25 @@
 package br.com.currencyCalculator.convertion.implementation;
 
 import br.com.currencyCalculator.convertion.Currency;
-import br.com.currencyCalculator.convertion.FixedOperatingFeeCalculable;
-import br.com.currencyCalculator.convertion.IOFCalculable;
 import br.com.currencyCalculator.convertion.VariableOperatingFeeCalculable;
 
 import java.math.BigDecimal;
 
-public class Dollar extends Currency implements FixedOperatingFeeCalculable, VariableOperatingFeeCalculable, IOFCalculable {
-    private BigDecimal quotation = new BigDecimal(0.19);
+public class Dollar extends Currency implements VariableOperatingFeeCalculable {
 
-    private String abbreviation = "US$";
-
-    @Override
-    public String getAbbreviation() {
-        return this.abbreviation;
+    public Dollar() {
+        quotation = new BigDecimal("0.19");
+        abbreviation = "US$";
     }
 
     @Override
     public BigDecimal calculateFixedOperatingFee() {
-        return new BigDecimal(5.0);
-    }
-
-    @Override
-    public BigDecimal calculateIOF(BigDecimal amount) {
-        return new BigDecimal(0.011).multiply(amount);
+        return new BigDecimal("5.0");
     }
 
     @Override
     public BigDecimal calculateVariableOperatingFee(BigDecimal amount) {
-        return new BigDecimal(0.03).multiply(amount);
+        return new BigDecimal("0.03").multiply(amount);
     }
 
     @Override

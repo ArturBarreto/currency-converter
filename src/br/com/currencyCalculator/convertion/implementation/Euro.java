@@ -1,28 +1,19 @@
 package br.com.currencyCalculator.convertion.implementation;
 
 import br.com.currencyCalculator.convertion.Currency;
-import br.com.currencyCalculator.convertion.FixedOperatingFeeCalculable;
-import br.com.currencyCalculator.convertion.IOFCalculable;
 
 import java.math.BigDecimal;
 
-public class Euro extends Currency implements FixedOperatingFeeCalculable, IOFCalculable {
-    private BigDecimal quotation = new BigDecimal("0.2");
+public class Euro extends Currency {
 
-    private String abbreviation = "EUR";
-
-    public String getAbbreviation() {
-        return this.abbreviation;
+    public Euro() {
+        quotation = new BigDecimal("0.2");
+        abbreviation = "EUR";
     }
 
     @Override
     public BigDecimal calculateFixedOperatingFee() {
-        return new BigDecimal(6.0);
-    }
-
-    @Override
-    public BigDecimal calculateIOF(BigDecimal amount) {
-        return new BigDecimal("0.011").multiply(amount);
+        return new BigDecimal("6.0");
     }
 
     @Override
