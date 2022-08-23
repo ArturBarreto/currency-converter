@@ -1,6 +1,6 @@
-package br.com.currencyCalculator.memory;
+package br.com.currencycalculator.memory;
 
-import br.com.currencyCalculator.util.BigDecimalUtil;
+import br.com.currencycalculator.util.BigDecimalUtil;
 
 import java.math.BigDecimal;
 

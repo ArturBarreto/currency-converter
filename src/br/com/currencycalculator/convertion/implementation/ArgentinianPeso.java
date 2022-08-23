@@ -1,7 +1,7 @@
-package br.com.currencyCalculator.convertion.implementation;
+package br.com.currencycalculator.convertion.implementation;
 
-import br.com.currencyCalculator.convertion.Currency;
-import br.com.currencyCalculator.convertion.VariableOperatingFeeCalculable;
+import br.com.currencycalculator.convertion.Currency;
+import br.com.currencycalculator.convertion.VariableOperatingFeeCalculable;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package br.com.currencyCalculator.util;
+package br.com.currencycalculator.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

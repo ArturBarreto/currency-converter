@@ -1,6 +1,6 @@
-package br.com.currencyCalculator.convertion.implementation;
+package br.com.currencycalculator.convertion.implementation;
 
-import br.com.currencyCalculator.convertion.Currency;
+import br.com.currencycalculator.convertion.Currency;
 
 import java.util.HashMap;
 import java.util.Map;
