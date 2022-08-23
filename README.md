@@ -6,4 +6,5 @@
 ### Pedro Henrique Alves Rosendo
 ### Victor Silva Ribeiro
 
+# Scrum Board
 ![](ScrumBoard.png)
